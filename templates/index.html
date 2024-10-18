@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Адаптивный мета-тег -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Калькулятор глубины и ширины сварного соединения</title>
     <style>
         /* Основные стили */
         body {
             font-family: 'Roboto', sans-serif;
-            max-width: 600px;
+            max-width: 800px; /* Увеличено для больших экранов */
             margin: 0 auto;
             padding: 20px;
             background-color: #f3f4f6;
@@ -25,41 +25,42 @@
 
         form {
             display: flex;
-            flex-direction: column; /* Упрощаем для мобильных устройств */
-            gap: 8px;
+            flex-wrap: wrap; /* Позволяет элементам переноситься на новую строку */
+            gap: 15px;
             background-color: #fff;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        form div {
-            width: 100%; /* Ширина 100% для мобильных */
+        .form-group {
+            width: 100%; /* Полная ширина на мобильных */
         }
 
-        form label {
-            font-size: 14px;
+        label {
+            display: block;
+            font-size: 16px;
             margin-bottom: 6px;
             color: #34495e;
         }
 
-        form input[type="text"], form input[type="number"] {
-            width: 80%;
-            padding: 8px 12px;
+        input[type="text"] {
+            width: 90%;
+            padding: 12px 20px;
             border: 1px solid #dfe6e9;
             border-radius: 8px;
-            font-size: 14px;
+            font-size: 16px;
             background-color: #f9f9f9;
-            transition: border-color 0.3s ease;
+            transition: border-color 0.3s ease, background-color 0.3s ease;
         }
 
-        form input[type="text"]:focus, form input[type="number"]:focus {
+        input[type="text"]:focus {
             border-color: #3498db;
             outline: none;
             background-color: #ffffff;
         }
 
-        form input[type="submit"] {
+        input[type="submit"] {
             background-color: #3498db;
             color: #fff;
             padding: 12px 20px;
@@ -68,11 +69,10 @@
             cursor: pointer;
             font-size: 16px;
             transition: background-color 0.3s ease;
-            margin-top: 18px;
-            width: 100%; /* Ширина 100% для кнопки */
+            width: 100%;
         }
 
-        form input[type="submit"]:hover {
+        input[type="submit"]:hover {
             background-color: #2980b9;
         }
 
@@ -80,23 +80,19 @@
             text-align: center;
             font-size: 18px;
             color: #34495e;
-            margin-top: 15px;
+            margin-top: 20px;
         }
 
-        /* Медиа-запросы для больших экранов */
-        @media (min-width: 600px) {
-            form {
-                flex-direction: row; /* Изменяем направление на больших экранах */
-                flex-wrap: wrap;
+        /* Медиа-запрос для больших экранов */
+        @media (min-width: 768px) {
+            .form-group {
+                width: calc(50% - 7.5px); /* 50% ширины минус половина gap */
             }
 
-            form div {
-                width: 40%; /* Уменьшаем ширину на больших экранах */
-            }
-
-            form input[type="submit"] {
-                width: 100%; /* Кнопка не занимает всю ширину */
-
+            input[type="submit"] {
+                width: 50%;
+                margin: 20px auto 0;
+                display: block;
             }
         }
     </style>
@@ -106,28 +102,35 @@
 <h1>Предсказание глубины и ширины сварного соединения</h1>
 
 <form name="propertyForm" method="post">
-    <div>
-        <label>Показатель IW</label>
-        <input type="text" name="IW" value="{{ IW }}" required>
-    </div>
-    <div>
-        <label>Показатель IF</label>
-        <input type="text" name="IF" value="{{ IF }}" required>
-    </div>
-    <div>
-    <div>
-        <label>Показатель VW</label>
-        <input type="text" name="VW" value="{{ VW }}" required>
-    </div>
-    <div>
-        <label>Показатель FP</label>
-        <input type="text" name="FP" value="{{ FP }}" required>
+    <!-- Группа для IW -->
+    <div class="form-group">
+        <label for="IW">Показатель IW</label>
+        <input type="text" id="IW" name="IW" value="{{ IW }}" required>
     </div>
 
+    <!-- Группа для IF -->
+    <div class="form-group">
+        <label for="IF">Показатель IF</label>
+        <input type="text" id="IF" name="IF" value="{{ IF }}" required>
+    </div>
 
-    <input type="submit" value="Рассчитать праметры шва">
+    <!-- Группа для VW -->
+    <div class="form-group">
+        <label for="VW">Показатель VW</label>
+        <input type="text" id="VW" name="VW" value="{{ VW }}" required>
+    </div>
+
+    <!-- Группа для FP -->
+    <div class="form-group">
+        <label for="FP">Показатель FP</label>
+        <input type="text" id="FP" name="FP" value="{{ FP }}" required>
+    </div>
+
+    <!-- Кнопка отправки формы -->
+    <input type="submit" value="Рассчитать параметры шва">
 </form>
 
+<!-- Вывод сообщения с результатом -->
 <p>
     {% if message %}
     {{ message }}

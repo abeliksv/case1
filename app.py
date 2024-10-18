@@ -57,20 +57,12 @@ def index():
                 # Обрабатываем данные
                 scaled_data = preprocess(data)
                 print(data)
-                print("_________")
-                print(scaled_data)
 
                 # # считаем показатели
                 result = process(scaled_data)
-                # depth = round(depth, 3)
-                # width = round(width, 3)
-                print(result)
 
                 depth = round(result[0], 3)
                 width = round(result[1], 3)
-                print(depth)
-                print(width)
-
 
                 # Сообщение с результатом расчета
                 message = f"Глубина шва {depth} и ширина шва {width}"

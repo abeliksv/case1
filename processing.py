@@ -35,15 +35,11 @@ def process(scaled_data):
         print(f"An error_y occurred: {e}")
         return None
 
-    # Предсказываем стоимость
-    data_df = pd.DataFrame(scaled_data)
-    print("______*___")
-    print(data_df)
-    scaled_y = loaded_model.predict(data_df)
-    print("______**___")
-    print(scaled_y)
-    result = min_max_scaler_y.inverse_transform(scaled_y).squeeze()
-    print("_____***___")
 
+    data_df = pd.DataFrame(scaled_data)
+    # Предсказываем стоимость
+    scaled_y = loaded_model.predict(data_df)
     # Убираем квадратные скобки squeeze()
+    result = min_max_scaler_y.inverse_transform(scaled_y).squeeze()
+
     return result
