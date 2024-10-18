@@ -52,11 +52,8 @@ def index():
                     'FP': [FP],
                 })
 
-
-
                 # Обрабатываем данные
                 scaled_data = preprocess(data)
-                print(data)
 
                 # # считаем показатели
                 result = process(scaled_data)
@@ -68,7 +65,7 @@ def index():
                 message = f"Глубина шва {depth} и ширина шва {width}"
 
         except ValueError:
-                message = "Пожалуйста, введите корректные числовые значения."
+            message = "Пожалуйста, введите корректные числовые значения."
 
     # Передаем все переменные в шаблон для отображения
     return render_template("index.html",
