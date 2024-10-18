@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Предсказание глубины и ширины сварного соединения</title>
+    <style>
+        /* Основные стили */
+        body {
+            font-family: 'Roboto', sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f3f4f6;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 28px;
+            color: #2c3e50;
+            margin-bottom: 40px;
+        }
+
+        form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        form div {
+            width: 85%;
+        }
+
+        form label {
+            font-size: 14px;
+            margin-bottom: 6px;
+            color: #34495e;
+        }
+
+        form input[type="text"], form input[type="number"] {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #dfe6e9;
+            border-radius: 8px;
+            font-size: 16px;
+            background-color: #f9f9f9;
+            transition: border-color 0.3s ease;
+        }
+
+        form input[type="text"]:focus, form input[type="number"]:focus {
+            border-color: #3498db;
+            outline: none;
+            background-color: #ffffff;
+        }
+
+        form input[type="submit"] {
+            background-color: #3498db;
+            color: #fff;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+            margin-left: 60px;
+            width: 75%;
+        }
+
+        form input[type="submit"]:hover {
+            background-color: #2980b9;
+        }
+
+        p {
+            text-align: center;
+            font-size: 20px;
+            color: #34495e;
+            margin-top: 20px;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 16px;
+        }
+    </style>
+
+    <script>
+        function validateForm() {
+            let IW = document.forms["propertyForm"]["IW"].value;
+            let IF = document.forms["propertyForm"]["IF"].value;
+            let VW = document.forms["propertyForm"]["VW"].value;
+            let FP = document.forms["propertyForm"]["FP"].value;
+
+            let errors = [];
+
+            if (isNaN(IW) || IW < 43 || IW > 49) {
+                errors.push("Показатель IW должен быть положительным в интервале от 43.0 до 49.0");
+            }
+            if (isNaN(IF) || IF < 141 || IF > 150) {
+                errors.push("Показатель IF должен быть положительным в интервале от 141.0 до 150.0");
+            }
+            if (isNaN(VW) || VW < 4.5 || VW > 12.0) {
+                errors.push("Показатель VW должен быть положительным в интервале от 4.5 до 12.0");
+            }
+            if (isNaN(FP) || FP < 50.0 || FP > 125.0) {
+                errors.push("Показатель FP должен быть положительным в интервале от 5.00 до 125.0");
+            }
+
+
+            if (errors.length > 0) {
+                document.getElementById("errorMessages").innerHTML = errors.join("<br>");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</head>
+<body>
+
+<h1>Предсказание глубины и ширины сварного соединения</h1>
+
+<form name="propertyForm" method="post" onsubmit="return validateForm()">
+    <div>
+        <label>Показатель IW</label>
+        <input type="text" name="IW" value="{{ IW }}" required>
+    </div>
+    <div>
+        <label>Показатель IF</label>
+        <input type="text" name="IF" value="{{ IF }}" required>
+    </div>
+    <div>
+        <label>Показатель VW</label>
+        <input type="text" name="VW" value="{{ VW }}" required>
+    </div>
+    <div>
+        <label>Показатель FP</label>
+        <input type="text" name="FP" value="{{ FP }}" required>
+    </div>
+
+    <div id="errorMessages" class="error-message"></div>
+    <input type="submit" value="Рассчитать глубину и ширину сварного шва">
+</form>
+
+<p>
+    {% if message %}
+    {{ message }}
+    {% endif %}
+</p>
+
+</body>
+</html>
