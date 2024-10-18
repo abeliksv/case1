@@ -9,7 +9,7 @@ app = Flask(__name__)
 def index():
     # Значения по умолчанию
     IW = 45
-    IF = 140
+    IF = 142
     VW = 8.5
     FP = 78
 
@@ -18,7 +18,7 @@ def index():
     if request.method == "POST":
         # Получаем значения, введённые пользователем
         IW = request.form.get("IW", 45)
-        IF = request.form.get("IF", 140)
+        IF = request.form.get("IF", 142)
         VW = request.form.get("VW", 8.5)
         FP = request.form.get("FP", 78)
 
