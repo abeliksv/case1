@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Предсказание глубины и ширины сварного соединения</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Адаптивный мета-тег -->
+    <title>Калькулятор стоимости недвижимости</title>
     <style>
         /* Основные стили */
         body {
@@ -12,28 +13,28 @@
             padding: 20px;
             background-color: #f3f4f6;
             color: #333;
-            line-height: 1.6;
+            line-height: 1.4;
         }
 
         h1 {
             text-align: center;
-            font-size: 28px;
+            font-size: 24px;
             color: #2c3e50;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
         }
 
         form {
             display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
+            flex-direction: column; /* Упрощаем для мобильных устройств */
+            gap: 8px;
             background-color: #fff;
-            padding: 40px;
+            padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         form div {
-            width: 85%;
+            width: 100%; /* Ширина 100% для мобильных */
         }
 
         form label {
@@ -43,11 +44,11 @@
         }
 
         form input[type="text"], form input[type="number"] {
-            width: 100%;
-            padding: 12px 15px;
+            width: 80%;
+            padding: 8px 12px;
             border: 1px solid #dfe6e9;
             border-radius: 8px;
-            font-size: 16px;
+            font-size: 14px;
             background-color: #f9f9f9;
             transition: border-color 0.3s ease;
         }
@@ -67,9 +68,8 @@
             cursor: pointer;
             font-size: 16px;
             transition: background-color 0.3s ease;
-            margin-top: 20px;
-            margin-left: 60px;
-            width: 75%;
+            margin-top: 18px;
+            width: 100%; /* Ширина 100% для кнопки */
         }
 
         form input[type="submit"]:hover {
@@ -78,54 +78,34 @@
 
         p {
             text-align: center;
-            font-size: 20px;
+            font-size: 18px;
             color: #34495e;
-            margin-top: 20px;
+            margin-top: 15px;
         }
 
-        .error-message {
-            color: red;
-            font-size: 16px;
+        /* Медиа-запросы для больших экранов */
+        @media (min-width: 600px) {
+            form {
+                flex-direction: row; /* Изменяем направление на больших экранах */
+                flex-wrap: wrap;
+            }
+
+            form div {
+                width: 40%; /* Уменьшаем ширину на больших экранах */
+            }
+
+            form input[type="submit"] {
+                width: 100%; /* Кнопка не занимает всю ширину */
+
+            }
         }
     </style>
-
-    <script>
-        function validateForm() {
-            let IW = document.forms["propertyForm"]["IW"].value;
-            let IF = document.forms["propertyForm"]["IF"].value;
-            let VW = document.forms["propertyForm"]["VW"].value;
-            let FP = document.forms["propertyForm"]["FP"].value;
-
-            let errors = [];
-
-            if (isNaN(IW) || IW < 43 || IW > 49) {
-                errors.push("Показатель IW должен быть положительным в интервале от 43.0 до 49.0");
-            }
-            if (isNaN(IF) || IF < 141 || IF > 150) {
-                errors.push("Показатель IF должен быть положительным в интервале от 141.0 до 150.0");
-            }
-            if (isNaN(VW) || VW < 4.5 || VW > 12.0) {
-                errors.push("Показатель VW должен быть положительным в интервале от 4.5 до 12.0");
-            }
-            if (isNaN(FP) || FP < 50.0 || FP > 125.0) {
-                errors.push("Показатель FP должен быть положительным в интервале от 5.00 до 125.0");
-            }
-
-
-            if (errors.length > 0) {
-                document.getElementById("errorMessages").innerHTML = errors.join("<br>");
-                return false;
-            }
-
-            return true;
-        }
-    </script>
 </head>
 <body>
 
 <h1>Предсказание глубины и ширины сварного соединения</h1>
 
-<form name="propertyForm" method="post" onsubmit="return validateForm()">
+<form name="propertyForm" method="post">
     <div>
         <label>Показатель IW</label>
         <input type="text" name="IW" value="{{ IW }}" required>
@@ -135,6 +115,7 @@
         <input type="text" name="IF" value="{{ IF }}" required>
     </div>
     <div>
+    <div>
         <label>Показатель VW</label>
         <input type="text" name="VW" value="{{ VW }}" required>
     </div>
@@ -143,8 +124,8 @@
         <input type="text" name="FP" value="{{ FP }}" required>
     </div>
 
-    <div id="errorMessages" class="error-message"></div>
-    <input type="submit" value="Рассчитать глубину и ширину сварного шва">
+
+    <input type="submit" value="Рассчитать праметры шва">
 </form>
 
 <p>
