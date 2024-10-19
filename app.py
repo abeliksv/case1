@@ -1,5 +1,4 @@
-import numpy as np
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, url_for
 from processing import process, preprocess
 import pandas as pd
 
@@ -37,9 +36,9 @@ def index():
             if VW < 4.5 or VW > 12.0:
                 print("3")
                 errors.append("Показатель VW должен быть положительным в интервале от 4.5 до 12.0")
-            if FP < 5 or FP > 125:
+            if FP < 50 or FP > 125:
                 print("4")
-                errors.append("Показатель FP должен быть положительным в интервале от 5.00 до 125.0")
+                errors.append("Показатель FP должен быть положительным в интервале от 50.0 до 125.0")
 
             if errors:
                 message = "<br>".join(errors)
