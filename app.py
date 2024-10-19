@@ -12,7 +12,7 @@ def index():
     IF = 142
     VW = 8.5
     FP = 78
-    message = ''
+    message = None
     errors = []
 
     if request.method == "POST":
@@ -61,7 +61,7 @@ def index():
                 width = round(result[1], 3)
 
                 # Сообщение с результатом расчета
-                message = f"Глубина шва {depth} и ширина шва {width}"
+                message = f"Глубина {depth} и ширина {width} сварного соединения"
 
         except ValueError:
             message = "Пожалуйста, введите корректные числовые значения."

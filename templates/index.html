@@ -32,15 +32,17 @@
         }
 
         h1 {
+
             text-align: center;
             font-size: 20px;
             color: #2c3e50;
-            margin-bottom: 15px;
-            padding: 12px 20px;
-
+            margin: 0 0 30px 0;
+            padding-top: 20px;
         }
 
         form {
+            position: relative;
+            padding-top: 20px;
             display: flex;
             flex-wrap: wrap;
             gap: 15px;
@@ -50,9 +52,15 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
         }
 
-        .form-group {
-            width: 100%;
+        .result-form {
+            margin-top: 12px;
+            display: none;
         }
+
+        .result-form.visible {
+            display: block;
+        }
+
 
         label {
             display: block;
@@ -92,14 +100,11 @@
         input[type="submit"]:hover {
             background-color: #2980b9;
         }
-
         p {
             text-align: center;
-            font-size: 22px;
+            font-size: 20px;
             color: #34495e;
-            margin-top: 20px;
             background-color: rgba(255, 255, 255, 1);
-            padding: 10px;
             border-radius: 8px;
         }
 
@@ -121,44 +126,36 @@
 
 
 <form name="propertyForm" method="post">
-
     <h1>Предсказание глубины и ширины сварного соединения</h1>
-
     <!-- Группа для IW -->
     <div class="form-group">
         <label for="IW">Показатель IW</label>
         <input type="text" id="IW" name="IW" value="{{ IW }}" required>
     </div>
-
     <!-- Группа для IF -->
     <div class="form-group">
         <label for="IF">Показатель IF</label>
         <input type="text" id="IF" name="IF" value="{{ IF }}" required>
     </div>
-
     <!-- Группа для VW -->
     <div class="form-group">
         <label for="VW">Показатель VW</label>
         <input type="text" id="VW" name="VW" value="{{ VW }}" required>
     </div>
-
     <!-- Группа для FP -->
     <div class="form-group">
         <label for="FP">Показатель FP</label>
         <input type="text" id="FP" name="FP" value="{{ FP }}" required>
     </div>
-
     <!-- Кнопка отправки формы -->
-    <input type="submit" value="Рассчитать параметры шва">
+    <input type="submit" value="Рассчитать параметры сварного соединения">
 </form>
-
-    <p>
-    {% if message %}
-    {{ message }}
-    {% endif %}
-    </p>
-<!-- Вывод сообщения с результатом -->
-
-
+    <form class="result-form {% if message %}visible{% endif %}">
+        <p>
+            {% if message %}
+            {{ message }}
+            {% endif %}
+        </p>
+    </form>
 </body>
 </html>
