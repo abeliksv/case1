@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 
 
-st.title("Пример приложения с помощью Streamlit")
+st.title("Калькулятор глубины и ширины сварного соединения")
 
 st.header("Пример графика")
 
@@ -23,3 +23,4 @@ st.map(df)
 agree = st.checkbox('I agree')
 if agree:
     st.markdown("Он согласен")
+
