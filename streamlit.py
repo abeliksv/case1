@@ -13,11 +13,11 @@ chart_data = pd.DataFrame(
 
 st.line_chart(chart_data)
 
-st.markdown("Текст про **карту**")
-df = pd.DataFrame(
-    np.random.randn(100, 2) / [0.5, 0.5] + [55.5, 37.33],
-    columns=['lat', 'lon'])
-st.map(df)
+# st.markdown("Текст про **карту**")
+# df = pd.DataFrame(
+#     np.random.randn(100, 2) / [0.5, 0.5] + [55.5, 37.33],
+#     columns=['lat', 'lon'])
+# st.map(df)
 
 
 agree = st.checkbox('I agree')
